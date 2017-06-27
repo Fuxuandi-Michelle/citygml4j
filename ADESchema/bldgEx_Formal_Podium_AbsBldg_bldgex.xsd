@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.citygml.org/ade/buildingExtra"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml"
+    xmlns:core="http://www.opengis.net/citygml/2.0" xmlns:frn="http://www.opengis.net/citygml/cityfurniture/2.0"
+    xmlns:tran="http://www.opengis.net/citygml/transportation/2.0"
+    xmlns:bldg="http://www.opengis.net/citygml/building/2.0"
+    targetNamespace="http://www.citygml.org/ade/buildingExtra"
+    elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xsd:import namespace="http://www.opengis.net/gml"
+        schemaLocation="../schemas/GML/3.1.1/base/gml.xsd" />
+    <xsd:import namespace="http://www.opengis.net/citygml/2.0"
+        schemaLocation="../schemas/CityGML/2.0.0/cityGMLBase.xsd" />
+    <xsd:import namespace="http://www.opengis.net/citygml/transportation/2.0"
+        schemaLocation="../schemas/CityGML/2.0.0/transportation.xsd" />
+    <xsd:import namespace="http://www.opengis.net/citygml/building/2.0"
+        schemaLocation="../schemas/CityGML/2.0.0/building.xsd" />
+    <xsd:import namespace="http://www.opengis.net/citygml/cityfurniture/2.0"
+        schemaLocation="../schemas/CityGML/2.0.0/cityFurniture.xsd" />
+    
+    
+    <!--1. define types-->
+
+   
+    <xsd:complexType name="PodiumType">
+        <xsd:complexContent>
+            <xsd:extension base="bldg:AbstractBuildingType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+	<xsd:complexType name="StoreyType">
+        <xsd:complexContent>
+            <xsd:extension base="core:AbstractSiteType">
+                <xsd:sequence>
+                            <xsd:element name="class" type="gml:CodeType" minOccurs="0"/>
+                            <xsd:element name="function" type="gml:CodeType" minOccurs="0" maxOccurs="unbounded"/>
+                            <xsd:element name="usage" type="gml:CodeType" minOccurs="0" maxOccurs="unbounded"/> 
+                            <xsd:element name="measuredHeight" type="gml:LengthType" minOccurs="0"/>
+                            <xsd:element name="lod2Solid" type="gml:SolidPropertyType" minOccurs="0"/>
+                            <xsd:element name="lod2MultiSurface" type="gml:MultiSurfacePropertyType" minOccurs="0"/> 
+                            <xsd:element name="lod2MultiCurve" type="gml:MultiCurvePropertyType" minOccurs="0"/> 
+                            <xsd:element name="outerBuildingInstallation" type="bldg:BuildingInstallationPropertyType" minOccurs="0" maxOccurs="unbounded"/>
+                            <xsd:element name="interiorBuildingInstallation" type="bldg:IntBuildingInstallationPropertyType" minOccurs="0" maxOccurs="unbounded"/>
+                            <xsd:element name="lod3Solid" type="gml:SolidPropertyType" minOccurs="0"/>
+                            <xsd:element name="lod3MultiSurface" type="gml:MultiSurfacePropertyType" minOccurs="0"/> 
+                            <xsd:element name="lod3MultiCurve" type="gml:MultiCurvePropertyType" minOccurs="0"/> 
+                            <xsd:element name="lod4Solid" type="gml:SolidPropertyType" minOccurs="0"/>
+                            <xsd:element name="lod4MultiSurface" type="gml:MultiSurfacePropertyType" minOccurs="0"/>
+                            <xsd:element name="lod4MultiCurve" type="gml:MultiCurvePropertyType" minOccurs="0"/>
+                            <xsd:element name="interiorRoom" type="bldg:InteriorRoomPropertyType" minOccurs="0" maxOccurs="unbounded"/> 
+                            <xsd:element name="interiorFurniture" type="bldg:InteriorFurniturePropertyType" minOccurs="0" maxOccurs="unbounded"/>
+							<xsd:element name="boundedBy" type="bldg:BoundarySurfacePropertyType" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+	
+	 <xsd:complexType name="StoreyPropertyType">
+        <xsd:sequence minOccurs="0">
+            <xsd:element ref="Storey"/>
+        </xsd:sequence>
+        <xsd:attributeGroup ref="gml:AssociationAttributeGroup"/>
+    </xsd:complexType>
+    
+	
+    <xsd:complexType name="BuildingExtraType">
+        <xsd:complexContent>
+            <xsd:extension base="bldg:BuildingInstallationType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+     
+    <xsd:complexType name="StairType">
+        <xsd:complexContent>
+            <xsd:extension base="BuildingExtraType">
+                <xsd:sequence>
+                    <xsd:element name="shapeType" type="StairTypeEnum"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="StairFlightType">
+        <xsd:complexContent>
+            <xsd:extension base="BuildingExtraType">
+                <xsd:sequence/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="ColumnType">
+        <xsd:complexContent>
+            <xsd:extension base="BuildingExtraType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RailingType">
+        <xsd:complexContent>
+            <xsd:extension base="BuildingExtraType">
+                <xsd:sequence>
+                    <xsd:element name="predefinedType" type="RailingTypeEnum"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="SlabType">
+        <xsd:complexContent>
+            <xsd:extension base="BuildingExtraType">
+                <xsd:sequence>
+                    <xsd:element name="predefinedType" type="SlabTypeEnum"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RampType">
+        <xsd:complexContent>
+            <xsd:extension base="BuildingExtraType">
+                <xsd:sequence>
+                    <xsd:element name="predefinedType" type="RampTypeEnum"/>    
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RampFlightType">
+        <xsd:complexContent>
+            <xsd:extension base="BuildingExtraType"/>   
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="CoveringType">
+        <xsd:complexContent>
+            <xsd:extension base="BuildingExtraType">
+                <xsd:sequence>
+                    <xsd:element name="CoveringRoom" type="bldg:RoomType" minOccurs="0" maxOccurs="unbounded"/>
+                    <xsd:element name="CoveringElements" type="core:AbstractCityObjectType" minOccurs="0" maxOccurs="unbounded"/>
+                    <xsd:element name="predefinedType" type="CoveringTypeEnum"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    
+    <xsd:complexType name="BeamType">
+        <xsd:complexContent>
+            <xsd:extension base="BuildingExtraType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="FlowTerminalType">
+        <xsd:complexContent>
+            <xsd:extension base="bldg:IntBuildingInstallationType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="AnnotationType">
+        <xsd:complexContent>
+            <xsd:extension base="BuildingExtraType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+
+    <xsd:simpleType name="StairTypeEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="STRAIGHT_RUN_STAIR" />
+            <xsd:enumeration value="TWO_STRAIGHT_RUN_STAIR" />
+            <xsd:enumeration value="QUARTER_WINDING_STAIR" />
+            <xsd:enumeration value="QUARTER_TURN_STAIR" />
+            <xsd:enumeration value="HALF_TURN_STAIR" />
+            <xsd:enumeration value="TWO_QUARTER_WINDING_STAIR" />
+            <xsd:enumeration value="TWO_QUARTER_TURN_STAIR" />
+            <xsd:enumeration value="THREE_QUARTER_WINDING_STAIR" />
+            <xsd:enumeration value="THREE_QUARTER_TURN_STAIR" />
+            <xsd:enumeration value="SPIRAL_STAIR" />
+            <xsd:enumeration value="DOUBLE_RETURN_STAIR" />
+            <xsd:enumeration value="CURVED_RUN_STAIR" />
+            <xsd:enumeration value="TWO_CURVED_RUN_STAIR" />
+            <xsd:enumeration value="USERDEFINED" />
+            <xsd:enumeration value="NOTDEFINED" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="RailingTypeEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="HANDRAIL" />
+            <xsd:enumeration value="GUARDRAIL" />
+            <xsd:enumeration value="BALUSTRADE" />
+            <xsd:enumeration value="USERDEFINED" />
+            <xsd:enumeration value="NOTDEFINED" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="SlabTypeEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="LANDING" />
+            <xsd:enumeration value="BASESLAB" />
+            <xsd:enumeration value="USERDEFINED" />
+            <xsd:enumeration value="NOTDEFINED" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="RampTypeEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="STRAIGHT_RUN_RAMP" />
+            <xsd:enumeration value="QUARTER_TURN_RAMP" />
+            <xsd:enumeration value="TWO_QUARTER_TURN_RAMP" />
+            <xsd:enumeration value="HALF_TURN_RAMP" />
+            <xsd:enumeration value="SPIRAL_RAMP" />
+            <xsd:enumeration value="USERDEFINED" />
+            <xsd:enumeration value="NOTDEFINED" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="CoveringTypeEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="CLADDING" />
+            <xsd:enumeration value="INSULATION" />
+            <xsd:enumeration value="MEMBRANE" />
+            <xsd:enumeration value="SLEEVING" />
+            <xsd:enumeration value="WRAPPING" />
+            <xsd:enumeration value="USERDEFINED" />
+            <xsd:enumeration value="NOTDEFINED" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="RoofTypeEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="FLAT_ROOF" />
+            <xsd:enumeration value="SHED_ROOF" />
+            <xsd:enumeration value="GABLE_ROOF" />
+            <xsd:enumeration value="HIP_ROOF" />
+            <xsd:enumeration value="HIPPED_GABLE_ROOF" />
+            <xsd:enumeration value="GAMBREL_ROOF" />
+            <xsd:enumeration value="MANSARD_ROOF" />
+            <xsd:enumeration value="BARREL_ROOF" />
+            <xsd:enumeration value="RAINBOW_ROOF" />
+            <xsd:enumeration value="BUTTERFLY_ROOF" />
+            <xsd:enumeration value="PAVILION_ROOF" />
+            <xsd:enumeration value="DOME_ROOF" />
+            <xsd:enumeration value="FREEFORM" />
+            <xsd:enumeration value="NOTDEFINED" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    
+    <!--define property for building-->
+    <xsd:element name="containStorey" type="StoreyPropertyType" substitutionGroup="bldg:_GenericApplicationPropertyOfAbstractBuilding"/>
+    <xsd:element name="podiumID" type="xsd:string" substitutionGroup="bldg:_GenericApplicationPropertyOfAbstractBuilding"/>
+    <xsd:element name="baseLevel" type="gml:LengthType" substitutionGroup="bldg:_GenericApplicationPropertyOfAbstractBuilding"/>
+    <xsd:element name="roofLevel" type="gml:LengthType" substitutionGroup="bldg:_GenericApplicationPropertyOfAbstractBuilding"/>
+
+    <!--define property for RoofSurface-->
+    <xsd:element name="RoofShapeType" type="RoofTypeEnum" substitutionGroup="bldg:_GenericApplicationPropertyOfRoofSurface"/>
+    
+    <!--define property for opening-->
+    <xsd:element name="Width" type="gml:LengthType" substitutionGroup="bldg:_GenericApplicationPropertyOfOpening"/>
+    <xsd:element name="Height" type="gml:LengthType" substitutionGroup="bldg:_GenericApplicationPropertyOfOpening"/>
+ 
+    
+    <!--define Storey Feature-->
+    <xsd:element name="Storey" type="StoreyType" substitutionGroup="core:_Site"/>
+    <xsd:element name="Podium" type="PodiumType" substitutionGroup="bldg:_AbstractBuilding"/>
+    
+    <!--define BuildingExtra Feature-->
+    <xsd:element name="BuildingExtra" type="BuildingExtraType" substitutionGroup="bldg:BuildingInstallation"/>
+    
+    <xsd:element name="Stair" type="StairType" substitutionGroup="BuildingExtra"/>
+    
+    <xsd:element name="StairFlight" type="StairFlightType" substitutionGroup="BuildingExtra"/>
+    
+    <xsd:element name="Column" type="ColumnType" substitutionGroup="BuildingExtra"/>
+    
+    <xsd:element name="Railing" type="RailingType" substitutionGroup="BuildingExtra"/>
+    
+    <xsd:element name="Slab" type="SlabType" substitutionGroup="BuildingExtra"/>
+    
+    <xsd:element name="Ramp" type="RampType" substitutionGroup="BuildingExtra"/>
+    
+    <xsd:element name="RampFlight" type="RampFlightType" substitutionGroup="BuildingExtra"/>
+    
+    <xsd:element name="Covering" type="CoveringType" substitutionGroup="BuildingExtra"/>
+    
+    <xsd:element name="Beam" type="BeamType" substitutionGroup="BuildingExtra"/>
+    
+    <xsd:element name="FlowTerminal" type="FlowTerminalType" substitutionGroup="bldg:IntBuildingInstallation"/>
+    
+    <xsd:element name="Annotation" type="AnnotationType" substitutionGroup="BuildingExtra"/>
+    
+    
+    
+</xsd:schema>
+
+

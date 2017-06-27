@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.citygml.org/ade/buildingExtra"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml"
+    xmlns:core="http://www.opengis.net/citygml/2.0" xmlns:frn="http://www.opengis.net/citygml/cityfurniture/2.0"
+    xmlns:tran="http://www.opengis.net/citygml/transportation/2.0"
+    xmlns:bldg="http://www.opengis.net/citygml/building/2.0"
+    targetNamespace="http://www.citygml.org/ade/buildingExtra"
+    elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xsd:import namespace="http://www.opengis.net/gml"
+        schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd" />
+    <xsd:import namespace="http://www.opengis.net/citygml/2.0"
+        schemaLocation="http://schemas.opengis.net/citygml/2.0/cityGMLBase.xsd" />
+    <xsd:import namespace="http://www.opengis.net/citygml/transportation/2.0"
+        schemaLocation="http://schemas.opengis.net/citygml/transportation/2.0/transportation.xsd" />
+    <xsd:import namespace="http://www.opengis.net/citygml/building/2.0"
+        schemaLocation="http://schemas.opengis.net/citygml/building/2.0/building.xsd" />
+    <xsd:import namespace="http://www.opengis.net/citygml/cityfurniture/2.0"
+        schemaLocation="http://schemas.opengis.net/citygml/cityfurniture/2.0/cityFurniture.xsd" />
+    
+    <!--1. define types-->
+
+   
+    <xsd:complexType name="PodiumType">
+        <xsd:complexContent>
+            <xsd:extension base="bldg:AbstractBuildingType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+	<xsd:complexType name="StoreyType">
+        <xsd:complexContent>
+            <xsd:extension base="core:AbstractSiteType">
+                <xsd:sequence>
+                            <xsd:element name="class" type="gml:CodeType" minOccurs="0"/>
+                            <xsd:element name="function" type="gml:CodeType" minOccurs="0" maxOccurs="unbounded"/>
+                            <xsd:element name="usage" type="gml:CodeType" minOccurs="0" maxOccurs="unbounded"/> 
+                            <xsd:element name="measuredHeight" type="gml:LengthType" minOccurs="0"/>
+                            <xsd:element name="lod2Solid" type="gml:SolidPropertyType" minOccurs="0"/>
+                            <xsd:element name="lod2MultiSurface" type="gml:MultiSurfacePropertyType" minOccurs="0"/> 
+                            <xsd:element name="lod2MultiCurve" type="gml:MultiCurvePropertyType" minOccurs="0"/> 
+                            <xsd:element name="outerBuildingInstallation" type="bldg:BuildingInstallationPropertyType" minOccurs="0" maxOccurs="unbounded"/>
+                            <xsd:element name="interiorBuildingInstallation" type="bldg:IntBuildingInstallationPropertyType" minOccurs="0" maxOccurs="unbounded"/>
+                            <xsd:element name="lod3Solid" type="gml:SolidPropertyType" minOccurs="0"/>
+                            <xsd:element name="lod3MultiSurface" type="gml:MultiSurfacePropertyType" minOccurs="0"/> 
+                            <xsd:element name="lod3MultiCurve" type="gml:MultiCurvePropertyType" minOccurs="0"/> 
+                            <xsd:element name="lod4Solid" type="gml:SolidPropertyType" minOccurs="0"/>
+                            <xsd:element name="lod4MultiSurface" type="gml:MultiSurfacePropertyType" minOccurs="0"/>
+                            <xsd:element name="lod4MultiCurve" type="gml:MultiCurvePropertyType" minOccurs="0"/>
+                            <xsd:element name="interiorRoom" type="bldg:InteriorRoomPropertyType" minOccurs="0" maxOccurs="unbounded"/> 
+                            <xsd:element name="interiorFurniture" type="bldg:InteriorFurniturePropertyType" minOccurs="0" maxOccurs="unbounded"/>
+							<xsd:element name="boundedBy" type="bldg:BoundarySurfacePropertyType" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+	
+	 <xsd:complexType name="StoreyPropertyType">
+        <xsd:sequence minOccurs="0">
+            <xsd:element ref="Storey"/>
+        </xsd:sequence>
+        <xsd:attributeGroup ref="gml:AssociationAttributeGroup"/>
+    </xsd:complexType>
+
+     
+    <xsd:complexType name="StairType">
+        <xsd:complexContent>
+            <xsd:extension base="bldg:BuildingInstallationType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="StairFlightType">
+        <xsd:complexContent>
+             <xsd:extension base="bldg:BuildingInstallationType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="ColumnType">
+        <xsd:complexContent>
+             <xsd:extension base="bldg:BuildingInstallationType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RailingType">
+        <xsd:complexContent>
+             <xsd:extension base="bldg:BuildingInstallationType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="SlabType">
+        <xsd:complexContent>
+             <xsd:extension base="bldg:BuildingInstallationType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RampType">
+        <xsd:complexContent>
+             <xsd:extension base="bldg:BuildingInstallationType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RampFlightType">
+        <xsd:complexContent>
+            <xsd:extension base="bldg:BuildingInstallationType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="CoveringType">
+        <xsd:complexContent>
+             <xsd:extension base="bldg:BuildingInstallationType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    
+    <xsd:complexType name="BeamType">
+        <xsd:complexContent>
+            <xsd:extension base="bldg:BuildingInstallationType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="FlowTerminalType">
+        <xsd:complexContent>
+             <xsd:extension base="bldg:BuildingInstallationType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    
+    <!--define property for building-->
+    <xsd:element name="containStorey" type="StoreyPropertyType" substitutionGroup="bldg:_GenericApplicationPropertyOfAbstractBuilding"/>
+    <xsd:element name="podiumID" type="xsd:string" substitutionGroup="bldg:_GenericApplicationPropertyOfAbstractBuilding"/>
+    <xsd:element name="baseLevel" type="gml:LengthType" substitutionGroup="bldg:_GenericApplicationPropertyOfAbstractBuilding"/>
+    <xsd:element name="roofLevel" type="gml:LengthType" substitutionGroup="bldg:_GenericApplicationPropertyOfAbstractBuilding"/>
+
+    
+    
+    <!--define property for opening-->
+    <xsd:element name="Width" type="gml:LengthType" substitutionGroup="bldg:_GenericApplicationPropertyOfOpening"/>
+    <xsd:element name="Height" type="gml:LengthType" substitutionGroup="bldg:_GenericApplicationPropertyOfOpening"/>
+ 
+    
+    <!--define Storey Feature-->
+    <xsd:element name="Storey" type="StoreyType" substitutionGroup="core:_Site"/>
+    <xsd:element name="Podium" type="PodiumType" substitutionGroup="bldg:_AbstractBuilding"/>
+    
+    <!--define BuildingExtra Feature-->
+   
+    
+    <xsd:element name="Stair" type="StairType" substitutionGroup="bldg:BuildingInstallation"/>
+    
+    <xsd:element name="StairFlight" type="StairFlightType" substitutionGroup="bldg:BuildingInstallation"/>
+    
+    <xsd:element name="Column" type="ColumnType" substitutionGroup="bldg:BuildingInstallation"/>
+    
+    <xsd:element name="Railing" type="RailingType" substitutionGroup="bldg:BuildingInstallation"/>
+    
+    <xsd:element name="Slab" type="SlabType" substitutionGroup="bldg:BuildingInstallation"/>
+    
+    <xsd:element name="Ramp" type="RampType" substitutionGroup="bldg:BuildingInstallation"/>
+    
+    <xsd:element name="RampFlight" type="RampFlightType" substitutionGroup="bldg:BuildingInstallation"/>
+    
+    <xsd:element name="Covering" type="CoveringType" substitutionGroup="bldg:BuildingInstallation"/>
+    
+    <xsd:element name="Beam" type="BeamType" substitutionGroup="bldg:BuildingInstallation"/>
+    
+    <xsd:element name="FlowTerminal" type="FlowTerminalType" substitutionGroup="bldg:BuildingInstallation"/>
+ 
+</xsd:schema>
